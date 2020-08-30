@@ -30,6 +30,7 @@ namespace QrCodeAcceptanceTests
         public static void TakeScreenshot(string screenshotName)
         {
             var screenshotPath = Path.Combine(ScreenshotPath, screenshotName);
+            File.WriteAllText($"{screenshotPath}.html", CurrentDriver.PageSource);
             CurrentDriver.GetScreenshot().SaveAsFile(screenshotPath);
             Console.WriteLine($"screenshot saved to {screenshotPath}");
         }
