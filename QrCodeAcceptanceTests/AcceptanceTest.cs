@@ -28,8 +28,8 @@ namespace QrCodeAcceptanceTests
 
             if (System.Environment.GetEnvironmentVariable("CI") == "true")
             {
-                options.AddArgument("--headless");
                 options.BinaryLocation = System.Environment.GetEnvironmentVariable("CHROMEWEBDRIVER");
+                options.AddArgument("--remote-debugging-port=9222");
             }
 
             _driver = new ChromeDriver(options);
