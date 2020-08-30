@@ -44,11 +44,6 @@ namespace QrCodeAcceptanceTests
             }
 
             ChromeOptions options = new ChromeOptions();
-            if (RunningInCI)
-            {
-                options.AddArgument("--remote-debugging-port=9222");
-                options.AddArgument("--no-sandbox");
-            }
 
             CurrentDriver = new ChromeDriver(options);
         }
