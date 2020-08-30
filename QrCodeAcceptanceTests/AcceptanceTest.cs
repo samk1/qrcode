@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace QrCodeAcceptanceTests
 {
     [TestClass]
-    public class ChromeDriverTest
+    public class AcceptanceTest
     {
         // In order to run the below test(s), 
         // please follow the instructions from http://go.microsoft.com/fwlink/?LinkId=619687
@@ -18,7 +18,7 @@ namespace QrCodeAcceptanceTests
         private CancellationTokenSource _serverCancellationTokenSource;
 
         [TestInitialize]
-        public void ChromeDriverInitialize()
+        public void AcceptanceTestInitialize()
         {
             // Initialize edge driver 
             var options = new ChromeOptions
@@ -47,7 +47,7 @@ namespace QrCodeAcceptanceTests
         }
 
         [TestCleanup]
-        public void EdgeDriverCleanup()
+        public void AcceptanceTestCleanup()
         {
             _driver.Quit();
             _serverCancellationTokenSource.Cancel();
