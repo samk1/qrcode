@@ -29,6 +29,7 @@ namespace QrCodeAcceptanceTests
             if (System.Environment.GetEnvironmentVariable("CI") == "true")
             {
                 options.AddArgument("--headless");
+                options.BinaryLocation = System.Environment.GetEnvironmentVariable("CHROMEWEBDRIVER");
             }
 
             _driver = new ChromeDriver(options);
