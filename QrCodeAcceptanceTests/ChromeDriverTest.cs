@@ -25,6 +25,12 @@ namespace QrCodeAcceptanceTests
             {
                 PageLoadStrategy = PageLoadStrategy.Normal
             };
+
+            if (System.Environment.GetEnvironmentVariable("CI") == "true")
+            {
+                options.AddArgument("--headless");
+            }
+
             _driver = new ChromeDriver(options);
 
             _serverCancellationTokenSource = new CancellationTokenSource();
