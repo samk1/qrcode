@@ -26,5 +26,5 @@ jobs:
     - name: Upload Screenshots
       uses: actions/upload-artifact@v2
       with:
-        name: "Screenshots"
-        path: "~/screenshots/**/*.png"
+        name: screenshots
+        path: ~/screenshots/**/*.png
