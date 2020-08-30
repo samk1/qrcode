@@ -2,6 +2,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,44 +16,44 @@ namespace QrCodeAcceptanceTests
         // please follow the instructions from http://go.microsoft.com/fwlink/?LinkId=619687
         // to install Microsoft WebDriver.
 
+        public static string ScreenshotPath = Path.Combine(Environment.CurrentDirectory, "screenshots");
+
+        private static CancellationTokenSource _serverCancellationTokenSource;
         private ChromeDriver _driver;
-        private CancellationTokenSource _serverCancellationTokenSource;
 
-        [TestInitialize]
-        public void AcceptanceTestInitialize()
+        [AssemblyInitialize]
+        public static void AssemblyInit(TestContext context)
         {
-            // Initialize edge driver 
-            var options = new ChromeOptions
-            {
-                PageLoadStrategy = PageLoadStrategy.Normal
-            };
+            Browser.Start();
 
-            if (System.Environment.GetEnvironmentVariable("CI") == "true")
+            if (!Directory.Exists(ScreenshotPath))
             {
-                options.AddArgument("--remote-debugging-port=9222");
-                options.AddArgument("--no-sandbox");
-                options.AddArgument("--headless");
+                Directory.CreateDirectory(ScreenshotPath);
             }
-
-            _driver = new ChromeDriver(options);
 
             _serverCancellationTokenSource = new CancellationTokenSource();
             QrCode.Program.CreateHostBuilder(null).Build().RunAsync(_serverCancellationTokenSource.Token);
         }
 
-        [TestMethod]
+        [AssemblyCleanup]
+        public static void AssemblyCleanup()
+        {
+            Browser.CurrentDriver.Quit();
+            _serverCancellationTokenSource.Cancel();
+        }
+
+        [TestInitialize]
+        public void AcceptanceTestInitialize()
+        {
+            _driver = Browser.CurrentDriver;
+        }
+
+        [AcceptanceTestMethod]
         public void VerifyPageTitle()
         {
             // Replace with your own test logic
             _driver.Url = "https://localhost:5001";
             Assert.AreEqual("QrCode", _driver.Title);
-        }
-
-        [TestCleanup]
-        public void AcceptanceTestCleanup()
-        {
-            _driver.Quit();
-            _serverCancellationTokenSource.Cancel();
         }
     }
 }
