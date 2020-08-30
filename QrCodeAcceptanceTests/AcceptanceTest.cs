@@ -30,6 +30,8 @@ namespace QrCodeAcceptanceTests
             {
                 options.BinaryLocation = System.Environment.GetEnvironmentVariable("CHROMEWEBDRIVER");
                 options.AddArgument("--remote-debugging-port=9222");
+                options.AddArgument("--no-sandbox");
+                options.AddArgument("--headless");
             }
 
             _driver = new ChromeDriver(options);
