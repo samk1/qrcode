@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2882BD55-9B88-4CDE-B347-FAD459DF1F2B}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		.github\workflows\dotnet-core.yml = .github\workflows\dotnet-core.yml
 	EndProjectSection
 EndProject
 Global
