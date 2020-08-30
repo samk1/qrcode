@@ -43,7 +43,7 @@ namespace QrCodeAcceptanceTests
         public void VerifyPageTitle()
         {
             // Replace with your own test logic
-            _driver.Url = "https://localhost:5001";
+            _driver.Url = "http://localhost:5001";
             Assert.AreEqual("QrCode", _driver.Title);
         }
     }
