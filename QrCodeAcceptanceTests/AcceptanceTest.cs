@@ -16,7 +16,6 @@ namespace QrCodeAcceptanceTests
         // please follow the instructions from http://go.microsoft.com/fwlink/?LinkId=619687
         // to install Microsoft WebDriver.
 
-        public static string ScreenshotPath = Path.Combine(Environment.CurrentDirectory, "screenshots");
 
         private static CancellationTokenSource _serverCancellationTokenSource;
         private ChromeDriver _driver;
@@ -25,11 +24,6 @@ namespace QrCodeAcceptanceTests
         public static void AssemblyInit(TestContext context)
         {
             Browser.Start();
-
-            if (!Directory.Exists(ScreenshotPath))
-            {
-                Directory.CreateDirectory(ScreenshotPath);
-            }
 
             _serverCancellationTokenSource = new CancellationTokenSource();
             QrCode.Program.CreateHostBuilder(null).Build().RunAsync(_serverCancellationTokenSource.Token);

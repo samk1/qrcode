@@ -17,9 +17,7 @@ namespace QrCodeAcceptanceTests
             if (testResults.Any((testResult) => testResult.Outcome != UnitTestOutcome.Passed))
             {
                 var screenshotName = $"{testMethod.MethodInfo.DeclaringType.FullName}.{testMethod.TestMethodName}.png";
-                var screenshotPath = Path.Combine(AcceptanceTest.ScreenshotPath, screenshotName);
-                Browser.CurrentDriver.GetScreenshot().SaveAsFile(screenshotPath);
-                Console.WriteLine($"screenshot saved to {screenshotPath}");
+                Browser.TakeScreenshot(screenshotName);
             }
 
             return testResults;
