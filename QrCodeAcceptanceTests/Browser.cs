@@ -19,7 +19,8 @@ namespace QrCodeAcceptanceTests
         {
             if (RunningInCI)
             {
-                return Path.Combine(Environment.GetEnvironmentVariable("HOME"), "screenshots");
+                var basePath = Environment.GetEnvironmentVariable("USERPROFILE");
+                return Path.Combine(basePath , "screenshots");
             }
             else
             {
