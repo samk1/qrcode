@@ -17,23 +17,20 @@ namespace QrCodeAcceptanceTests
         // to install Microsoft WebDriver.
 
 
-        private static CancellationTokenSource _serverCancellationTokenSource;
         private ChromeDriver _driver;
 
         [AssemblyInitialize]
         public static void AssemblyInit(TestContext context)
         {
             Browser.Start();
-
-            _serverCancellationTokenSource = new CancellationTokenSource();
-            QrCode.Program.CreateHostBuilder(null).Build().RunAsync(_serverCancellationTokenSource.Token);
+            TestServer.Start();
         }
 
         [AssemblyCleanup]
         public static void AssemblyCleanup()
         {
             Browser.CurrentDriver.Quit();
-            _serverCancellationTokenSource.Cancel();
+            TestServer.Stop();
         }
 
         [TestInitialize]
